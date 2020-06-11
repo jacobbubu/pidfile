@@ -1,10 +1,13 @@
 import * as path from 'path'
 import { promises as fs } from 'fs'
 import pidlock from '../src'
+import * as os from 'os'
+
+const tmpDir = os.tmpdir()
 
 describe('pidfile', () => {
   let checkPidFile = ''
-  const filename = path.resolve(__dirname, '../output/lock.pid')
+  const filename = path.resolve(tmpDir, 'pidfile-test.pid')
   afterEach(async () => {
     if (checkPidFile.length > 0) {
       try {
